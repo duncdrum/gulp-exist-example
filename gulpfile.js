@@ -137,13 +137,26 @@ function installXar () {
         .pipe(existClient.install({ packageUri }))
 }
 
+// TODO COPY
+// - copyStatic => copyPixel, copyXq, copyHtml, copyFont, copyVendor
+// - copyDynamic => copyJS, copyVector, copyXml, copyStyle
+// - copy?? => copyMd, copyJson
+function copyImg () {
+    return src(['src/img/**/*.*', '!src/**/*.svg'], {base: "src"})
+    .pipe(dest('build'))
+    .pipe(src('src/**/*.svg'), {base: "src"})
+    .pipe(dest('build'))
+}
+
+exports.copyImg = copyImg
 // composed tasks
 const build = series(
     clean,
     styles,
     minifyEs,
     templates,
-    copyStatic
+    copyStatic,
+    copyImg
 )
 const watchAll = parallel(
     watchStyles,
