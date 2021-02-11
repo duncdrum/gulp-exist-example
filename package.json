@@ -12,11 +12,12 @@
     "gulp-rename": "^2.0.0",
     "gulp-replace": "^1.0.0",
     "gulp-sass": "^4.1.0",
+    "gulp-svgmin": "^3.0.0",
     "gulp-uglify-es": "^2.0.0",
     "gulp-zip": "^5.0.2"
   },
   "name": "gulp-exist-example",
-  "version": "1.1.1",
+  "version": "1.2.1",
   "dependencies": {},
   "keywords": [],
   "author": "duncdrum",

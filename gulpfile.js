@@ -9,6 +9,7 @@ const uglify = require('gulp-uglify-es').default
 const replace = require('@existdb/gulp-replace-tmpl')
 const rename = require('gulp-rename')
 const del = require('delete')
+const svgmin = require('gulp-svgmin')
 
 const pkg = require('./package.json')
 const { version, license } = pkg
@@ -142,10 +143,12 @@ function installXar () {
 // - copyDynamic => copyJS, copyVector, copyXml, copyStyle
 // - copy?? => copyMd, copyJson
 function copyImg () {
-    return src(['src/img/**/*.*', '!src/**/*.svg'], {base: "src"})
+    return src('src/**/*.svg', {base: "src"})
+    .pipe(svgmin())
     .pipe(dest('build'))
-    .pipe(src('src/**/*.svg'), {base: "src"})
+    .pipe(src(['src/icon.png', 'src/img/**/*.*', '!src/**/*.svg'], {base: "src", allowEmpty: true}))
     .pipe(dest('build'))
+    
 }
 
 exports.copyImg = copyImg
