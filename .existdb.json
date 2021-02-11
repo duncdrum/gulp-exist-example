@@ -24,6 +24,8 @@
         "target": "myapp",
         "ns": "http://myapp/",
         "type": "application",
+        "author": "duncdrum",
+        "description": "myapp blah",
         "finish": "",
         "prepare": "",
         "website": "",

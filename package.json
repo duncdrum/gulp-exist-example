@@ -16,10 +16,10 @@
     "gulp-zip": "^5.0.2"
   },
   "name": "gulp-exist-example",
-  "version": "1.0.0",
+  "version": "1.1.1",
   "dependencies": {},
   "keywords": [],
-  "author": "Juri Leino",
+  "author": "duncdrum",
   "license": "ISC",
-  "description": ""
+  "description": "blah"
 }
