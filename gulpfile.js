@@ -8,7 +8,7 @@ const sass = require('gulp-sass')
 const uglify = require('gulp-uglify-es').default
 const replace = require('@existdb/gulp-replace-tmpl')
 const rename = require('gulp-rename')
-const del = require('delete')
+const del = require('del')
 const svgmin = require('gulp-svgmin')
 
 const pkg = require('./package.json')
