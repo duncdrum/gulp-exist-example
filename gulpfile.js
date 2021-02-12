@@ -91,15 +91,36 @@ const static = 'src/**/*.{xml,html,xq,xquery,xql,xqm,xsl,xconf}'
 /**
  * copy html templates, XSL stylesheet, XMLs and XQueries to 'build'
  */
+
+// TODO COPY
+// - copyStatic => copyPixel, copyXq, copyHtml, copyFont, copyVendor
+// - copyDynamic => copyJS, copyVector, copyXml, copyStyle
+// - copy?? => copyMd, copyJson
+
+
 function copyStatic () {
     return src(static).pipe(dest('build'))
 }
-exports.copy = copyStatic
+exports.copyStatic = copyStatic
 
 function watchStatic () {
     watch(static, series(copyStatic));
 }
 exports["watch:static"] = watchStatic
+
+let paths = {
+    input: 'src/',
+    output: 'build/'
+}
+function copyImg () {
+    return src(paths.input + '**/*.svg', {base: paths.input})
+    .pipe(svgmin())
+    .pipe(dest(paths.output))
+    .pipe(src([paths.input + 'icon.png', paths.input + 'img/**/*.{*,!svg}'], {base: paths.input, allowEmpty: true}))
+    .pipe(dest(paths.output))
+  }
+
+exports.copy = parallel(copyImg, copyStatic)
 
 /**
  * Upload all files in the build folder to existdb.
@@ -138,20 +159,7 @@ function installXar () {
         .pipe(existClient.install({ packageUri }))
 }
 
-// TODO COPY
-// - copyStatic => copyPixel, copyXq, copyHtml, copyFont, copyVendor
-// - copyDynamic => copyJS, copyVector, copyXml, copyStyle
-// - copy?? => copyMd, copyJson
-function copyImg () {
-    return src('src/**/*.svg', {base: "src"})
-    .pipe(svgmin())
-    .pipe(dest('build'))
-    .pipe(src(['src/icon.png', 'src/img/**/*.*', '!src/**/*.svg'], {base: "src", allowEmpty: true}))
-    .pipe(dest('build'))
-    
-}
 
-exports.copyImg = copyImg
 // composed tasks
 const build = series(
     clean,
